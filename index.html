@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Multas</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        header > h1{
+            padding: 20px;
+        }
+
+        p{
+            padding: 10px;
+        }
+
+        body{
+            font: normal 1.2em Arial;
+            text-align: center;
+            background-color: antiquewhite;
+        }
+
+        input#txtvel{
+            margin-bottom: 15px;
+        }
+
+        footer{
+            background-color: rgb(255, 210, 142);
+            position:absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        a#lkd{
+            text-decoration: none;
+        }
+
+        a#lkd:hover{
+            color: tomato;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sistema de Multas</h1>
+    </header>
+    <main>
+        <p>Insira a velocidade abaixo:</p>
+        <input type="number" name="txtvel" id="txtvel">
+        <input type="button" value="Verificar" onclick="receber()"> <!--No evento OnClick, ao clicar no botão, teremos a ativação do comando. Ao ativar o mesmo, ativaremos a function receber abaixo, ativando toda a sequência de códigos JS descritos dentro da function.-->
+        <div id="res">
+
+        </div>
+    </main>
+    <footer>
+        <p>Site desenvolvido por <strong><a href="https://www.linkedin.com/in/joaopaulo-chaves/" target="_blank" id="lkd">João Paulo</a></strong></p>
+    </footer>
+
+    <script>
+        /*Como podemos ver a function abaixo, é o bloco de comandos que serão executados quando o usuário interagir com o botão colocado acima com o evento Receber()*/
+
+        function receber(){
+
+        var txtv = window.document.getElementById('txtvel')
+
+        //Variável criada ref. ao valor de entrada no input:Number
+
+        var vel = Number(txtv.value) 
+
+        //criando uma nova variável convertendo a variável txtv acima (de string para Number) - *** IMPORTANTE *** txtv.value
+
+        var res = window.document.querySelector('div#res')
+
+        //Variável res (resposta) criada dentro do bloco Div id="res", que aparecerá o resultado das condições IF e ELSE *** IMPORTANTE ***
+
+        res.innerHTML = `<p>Sua velocidade atual é de <strong>${vel} Km/h</strong>.</p>`
+
+        //O comando acima é uma forma de texto que irá representar na tela dentro da div id="res" o parágrafo a seguir juntamente da Template String ${vel} que é a velocidade informada
+
+        /*        
+        ============== IMPORTANTE ==============
+            1- A condição abaixo foi feita para simular um radar de trânsito, que identifica a velocidade dos veículos e vê se os mesmos se encontram dentro do limite de velocidade.
+
+            2- Nesse caso, o limite de velocidade é 60km/h, então, foi feito a seguinte condição:
+
+            3- (if) Se a velocidade for acima de 60, aparecerá a seguinte mensagem dentro da div id="res" > "Você ultrapassou o limite de velocidade, MULTADO!!"
+            
+            4- (else) Se a velocidade for abaixo de 60, aparecerá a seguinte mensagem dentro da div = "res" > "Você não ultrapassou o limite de velocidade"
+        */
+
+        if (vel > 60) {
+            res.innerHTML += `<p>Você ultrapassou o limite de velocidade. <strong>MULTADO!!</strong></p>` // Perceba que aqui foi utilizado o operador "=+", visto que a variável "res" é uma string (concatenamos ela com a mensagem anterior "Sua velocidade atual é de ${vel} Km/h>"
+        } else {
+            res.innerHTML += `Você não ultrapassou o limite de velocidade.`//Aqui também usamos o "+=" para que as mensagens anteriores não sejam sobrescritas e sim recebidas pela var res.
+        }
+
+        /*
+        Por fim, aparecerá a seguinte mensagem independente de quaisquer condições: "Dirija sempre com cinto de segurança"
+        */
+       
+        res.innerHTML += `<p>Dirija sempre com cinto de segurança.</p>`
+    }
+    </script>
+</body>
+</html>
